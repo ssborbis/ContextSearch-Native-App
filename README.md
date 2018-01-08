@@ -6,3 +6,5 @@ This is a simple app written in C and Python that reads a requested file to base
 To install on Windows, grab the latest release and run the installer
 
 On Linux, compile or use the python script, copy the .json to ~/.mozilla/native-messaging-hosts/ContextSearch.json and edit the edit the "path" key in the .json
+
+On mac, it's ~/Library/Application Support/Mozilla/NativeMessagingHosts/ContextSearch.json
