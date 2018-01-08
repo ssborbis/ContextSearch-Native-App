@@ -134,14 +134,20 @@ int main(int argc, char *argv[])
  
 	if( stat( sub, &buffer ) != 0 ) {
 		fprintf(fp, "%s\tError reading file\n", getTime());
-		perror("Error reading file");
+		perror("Error reading file\n");
 		exit(1);
 	} else {
 		sprintf( mod_time, "%s", ctime(&buffer.st_mtime)  );
 		mod_time[strlen(mod_time) - 1] = '\0';
 	}
-
-	char * base64data = readBinaryFileToBase64(sub, fp);
+	
+	char * base64data;
+	if(strstr(buf, "!@!@") != NULL) {
+		fprintf(fp, "%s\tRequest for time only\n", getTime());
+		base64data = "";
+	} else {	
+		base64data = readBinaryFileToBase64(sub, fp);
+	}	
 
 	char message_content[strlen(base64data) + 128];
 	
