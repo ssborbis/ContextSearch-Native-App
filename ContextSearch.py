@@ -43,10 +43,6 @@ if '!@!@' in message_json:
 
 with open(message_json['path'], "rb") as image_file:
     encoded_string = base64.b64encode(image_file.read())
-	
-with open('test.txt', "w") as logfile:
-    logfile.write(message_json['path'])
-    logfile.write(encoded_string)
 
 mod_time = os.path.getmtime(message_json['path'])
 send_message(encode_message({"last_mod": time.ctime(mod_time), "base64": encoded_string}))
