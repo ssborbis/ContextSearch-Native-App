@@ -7,7 +7,8 @@ This is a simple app written in both C and python that reads a requested file to
 Grab the latest release and run the installer
 
 ## Other OS
-1. Compile or use the python script
+1. Download ContextSearch.c (or ContextSearch.py if using python) and ContextSearch.json
+2. Compile ContextSearch.c with gcc or equivelent (skip if using ContextSearch.py)
 2. Edit "path" key in ContextSearch.json to point to the binary or python script
 
 ### Linux
