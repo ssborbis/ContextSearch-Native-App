@@ -7,25 +7,25 @@ To install on Windows, grab the latest release and run the installer
 
 Other OS, compile or use the python script
 
-#Linux
+## Linux
 For global visibility, copy ContextSearch.json to:
 
-*/usr/lib/mozilla/native-messaging-hosts/ContextSearch.json
+* /usr/lib/mozilla/native-messaging-hosts/ContextSearch.json
 
 or:
 
-*/usr/lib64/mozilla/native-messaging-hosts/ContextSearch.json
+* /usr/lib64/mozilla/native-messaging-hosts/ContextSearch.json
 
 For per-user visibility
 
-*~/.mozilla/native-messaging-hosts/ContextSearch.json
+* ~/.mozilla/native-messaging-hosts/ContextSearch.json
 
-#Mac OS X
+## Mac OS X
 For global visibility, copy ContextSearch.json to:
 
-*/Library/Application Support/Mozilla/NativeMessagingHosts/ContextSearch.json
+* /Library/Application Support/Mozilla/NativeMessagingHosts/ContextSearch.json
 
 For per-user visibility
 
-*~/Library/Application Support/Mozilla/NativeMessagingHosts/ContextSearch.json
+* ~/Library/Application Support/Mozilla/NativeMessagingHosts/ContextSearch.json
 
