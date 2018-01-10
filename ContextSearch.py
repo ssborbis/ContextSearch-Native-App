@@ -26,7 +26,6 @@ def encode_message(message_content):
     encoded_length = struct.pack('@I', len(encoded_content))
     return {'length': encoded_length, 'content': encoded_content}
 
-
 # Send an encoded message to stdout.
 def send_message(encoded_message):
     sys.stdout.write(encoded_message['length'])
@@ -38,11 +37,10 @@ message_json = json.loads(message)
 
 if '!@!@' in message_json:
     mod_time = os.path.getmtime(message_json['!@!@'])
-    send_message(encode_message({"last_mod": time.ctime(mod_time), "base64": ""}))
+    send_message(encode_message({"last_mod": time.ctime(mod_time)}))
     sys.exit(0)
-
-with open(message_json['path'], "rb") as image_file:
-    encoded_string = base64.b64encode(image_file.read())
-
-mod_time = os.path.getmtime(message_json['path'])
-send_message(encode_message({"last_mod": time.ctime(mod_time), "base64": encoded_string}))
+else:
+    mod_time = os.path.getmtime(message_json['path'])
+    with open(message_json['path'], "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read())
+        send_message(encode_message({"last_mod": time.ctime(mod_time), "base64": encoded_string}))
