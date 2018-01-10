@@ -5,7 +5,9 @@ This is a simple app written in both C and python that reads a requested file to
 
 To install on Windows, grab the latest release and run the installer
 
-Other OS, compile or use the python script
+Other OS
+1. compile or use the python script
+2. edit "path" key in ContextSearch.json to point to the binary or python script
 
 ## Linux
 For global visibility, copy ContextSearch.json to:
