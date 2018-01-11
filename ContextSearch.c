@@ -7,7 +7,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-#define _VERSION "1.12"
+#define _VERSION "1.2.0rc2"
 
 static char encoding_table[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
                                 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
@@ -159,13 +159,18 @@ int main(int argc, char *argv[])
 		fclose(fp);
 		sendMessage("{\"error\": \"Error reading file\"}", 0);
 		exit(1);
+	} else if (S_ISDIR(buffer.st_mode)) {
+		fprintf(fp, "%s\tFile path is a directory\n", getTime());
+		fprintf(stderr, "%s\tFile path is a directory\n", getTime());
+		fclose(fp);
+		sendMessage("{\"error\": \"File path is a directory\"}", 0);
+		exit(1);
 	} else {
 		sprintf( mod_time, "%s", ctime(&buffer.st_mtime)  );
 		mod_time[strlen(mod_time) - 1] = '\0';
 	}
 		
-	char * blah = (char*) buf;
-	if(strstr(blah, "!@!@") != NULL) {
+	if(strstr(buf, "!@!@") != NULL) {
 		char message_content[128];
 		sprintf(message_content,"{\"last_mod\": \"%s\"}",&mod_time);
 		fclose(fp);
@@ -184,10 +189,11 @@ int main(int argc, char *argv[])
 
 	char message_content[strlen(base64data) + 128];
 	
-	int message_len = sprintf(	message_content,
-								"{\"last_mod\": \"%s\", \"base64\": \"%s\"}",
-								&mod_time,
-								base64data
+	int message_len = sprintf(	
+		message_content,
+		"{\"last_mod\": \"%s\", \"base64\": \"%s\"}",
+		&mod_time,
+		base64data
 	);
 	
 	free(base64data);
