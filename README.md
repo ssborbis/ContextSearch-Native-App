@@ -1,5 +1,5 @@
 # ContextSearch-Native-App
-Native App for use with Context Search
+Native App for use with ContextSearch web-ext
 
 This is a simple app written in both C and python that reads a requested file to base64 for webextensions native application processing.
 
