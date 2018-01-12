@@ -16,7 +16,7 @@ Creates folder C:\Program Files (x86)\ContextSearch with the following files
     uninstaller.exe
 
 Adds the following key to the registry
-HKLM\SOFTWARE\Mozilla\NativeMessagingHosts\ContextSearch
+- HKLM\SOFTWARE\Mozilla\NativeMessagingHosts\ContextSearch
 
 ## Other OS
 1. Download ContextSearch.c (or ContextSearch.py if using python) and ContextSearch.json
