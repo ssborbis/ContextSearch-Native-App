@@ -6,6 +6,18 @@ This is a simple app written in both C and python that reads a requested file to
 ## Windows
 Grab the latest release and run the installer
 
+The ContextSearch_installer.exe does the following
+
+Creates folder C:\Program Files (x86)\ContextSearch with the following files
+
+    ContextSearch.exe
+    ContextSearch.json
+    README.md
+    uninstaller.exe
+
+Adds the following key to the registry
+HKLM\SOFTWARE\Mozilla\NativeMessagingHosts\ContextSearch
+
 ## Other OS
 1. Download ContextSearch.c (or ContextSearch.py if using python) and ContextSearch.json
 2. Compile ContextSearch.c with gcc or equivelent (skip if using ContextSearch.py)
