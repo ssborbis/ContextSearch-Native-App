@@ -20,9 +20,19 @@ Adds the following key to the registry
 
 ## Other OS
 1. Download ContextSearch.c (or ContextSearch.py if using python) and ContextSearch.json
-2. Compile ContextSearch.c with gcc or equivelent (skip if using ContextSearch.py)
-2. Edit "path" key in ContextSearch.json to point to the binary or python script
-
+2. Compile ContextSearch.c with gcc or equivelent (e.g. <code> gcc ContextSearch.c -o ContextSearch</code>) 
+    OR 
+   <code>chmod+x ContextSearch.py</code> if using python under Linux
+2. Edit "path" key in ContextSearch.json to point to the binary or python script.  For example. if you installed ContextSearch.py to  /home/mclovin/bin your ContextSearch.json would look like:
+```javascript
+{
+"name": "ContextSearch",
+"description": "Sends base64 encoded search.json.mozlz4 file",
+"path": "/home/mclovin/bin/ContextSearch.py",
+"type": "stdio",
+"allowed_extensions": [ "{5dd73bb9-e728-4d1e-990b-c77d8e03670f}" ]
+}
+```
 ### Linux
 For global visibility, copy ContextSearch.json to:
 
