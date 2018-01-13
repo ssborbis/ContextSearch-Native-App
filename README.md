@@ -42,7 +42,7 @@ or:
 
 * /usr/lib64/mozilla/native-messaging-hosts/ContextSearch.json
 
-For per-user visibility
+For per-user visibility <b>recommended per user feedback</b>
 
 * ~/.mozilla/native-messaging-hosts/ContextSearch.json
 
