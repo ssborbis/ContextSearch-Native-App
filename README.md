@@ -16,14 +16,39 @@ Creates folder C:\Program Files (x86)\ContextSearch with the following files
     uninstaller.exe
 
 Adds the following key to the registry
-- HKLM\SOFTWARE\Mozilla\NativeMessagingHosts\ContextSearch
+
+<code>HKLM\SOFTWARE\Mozilla\NativeMessagingHosts\ContextSearch</code>
 
 ## Other OS
-1. Download ContextSearch.c (or ContextSearch.py if using python) and ContextSearch.json
-2. Compile ContextSearch.c with gcc or equivelent (e.g. <code> gcc ContextSearch.c -o ContextSearch</code>) 
-    OR 
-   <code>chmod +x ContextSearch.py</code> if using python under Linux
-2. Edit "path" key in ContextSearch.json to point to the binary or python script.  For example. if you installed ContextSearch.py to  /home/mclovin/bin your ContextSearch.json would look like:
+
+### Using ContextSearch C binary 
+##### Step 1
+Download ContextSearch.c and ContextSearch.json
+##### Step 2
+Compile ContextSearch.c with gcc or an equivelent compiler and output to the desired location
+e.g. <code>gcc ContextSearch.c -o /home/mclovin/bin/ContextSearch</code>
+##### Step 3
+Edit the "path" key in ContextSearch.json to point to the binary.  For example. if you compiled ContextSearch to  /home/mclovin/bin your ContextSearch.json would look like:
+
+```javascript
+{
+"name": "ContextSearch",
+"description": "Sends base64 encoded search.json.mozlz4 file",
+"path": "/home/mclovin/bin/ContextSearch",
+"type": "stdio",
+"allowed_extensions": [ "{5dd73bb9-e728-4d1e-990b-c77d8e03670f}" ]
+}
+```
+
+### Using Python 
+##### Step 1
+Download ContextSearch.py and ContextSearch.json
+##### Step 2
+Make ContextSearch.py executable and move to desired location
+<code>chmod +x ContextSearch.py && mv ContextSearch.py /home/mclovin/bin</code>
+##### Step 3
+Edit "path" key in ContextSearch.json to point to the python script.  For example. if you moved ContextSearch.py to  /home/mclovin/bin your ContextSearch.json would look like:
+
 ```javascript
 {
 "name": "ContextSearch",
@@ -33,25 +58,13 @@ Adds the following key to the registry
 "allowed_extensions": [ "{5dd73bb9-e728-4d1e-990b-c77d8e03670f}" ]
 }
 ```
-### Linux
-For global visibility, copy ContextSearch.json to:
 
-* /usr/lib/mozilla/native-messaging-hosts/ContextSearch.json
+##### Step 4
+Move ContextSearch.json to the location required by the Firefox NativeMessaging API
 
-or:
-
-* /usr/lib64/mozilla/native-messaging-hosts/ContextSearch.json
-
-For per-user visibility <b>!preferred method per user feedback</b>
-
+###### Linux
 * ~/.mozilla/native-messaging-hosts/ContextSearch.json
 
-### Mac OS X
-For global visibility, copy ContextSearch.json to:
-
-* /Library/Application Support/Mozilla/NativeMessagingHosts/ContextSearch.json
-
-For per-user visibility
-
+###### Mac OS X
 * ~/Library/Application Support/Mozilla/NativeMessagingHosts/ContextSearch.json
 
