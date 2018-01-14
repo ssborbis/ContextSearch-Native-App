@@ -40,6 +40,14 @@ Edit the "path" key in ContextSearch.json to point to the binary.  For example. 
 "allowed_extensions": [ "{5dd73bb9-e728-4d1e-990b-c77d8e03670f}" ]
 }
 ```
+##### Step 4
+Move ContextSearch.json to the location required by the Firefox NativeMessaging API
+
+###### Linux
+* ~/.mozilla/native-messaging-hosts/ContextSearch.json
+
+###### Mac OS X
+* ~/Library/Application Support/Mozilla/NativeMessagingHosts/ContextSearch.json
 
 ### Using Python 
 ##### Step 1
