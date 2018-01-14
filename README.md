@@ -22,7 +22,7 @@ Adds the following key to the registry
 1. Download ContextSearch.c (or ContextSearch.py if using python) and ContextSearch.json
 2. Compile ContextSearch.c with gcc or equivelent (e.g. <code> gcc ContextSearch.c -o ContextSearch</code>) 
     OR 
-   <code>chmod+x ContextSearch.py</code> if using python under Linux
+   <code>chmod +x ContextSearch.py</code> if using python under Linux
 2. Edit "path" key in ContextSearch.json to point to the binary or python script.  For example. if you installed ContextSearch.py to  /home/mclovin/bin your ContextSearch.json would look like:
 ```javascript
 {
