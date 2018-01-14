@@ -26,7 +26,8 @@ Adds the following key to the registry
 Download ContextSearch.c and ContextSearch.json
 ##### Step 2
 Compile ContextSearch.c with gcc or an equivelent compiler and output to the desired location
-e.g. <code>gcc ContextSearch.c -o /home/mclovin/bin/ContextSearch</code>
+
+<code>gcc ContextSearch.c -o /home/mclovin/bin/ContextSearch</code>
 ##### Step 3
 Edit the "path" key in ContextSearch.json to point to the binary.  For example. if you compiled ContextSearch to  /home/mclovin/bin your ContextSearch.json would look like:
 
@@ -45,6 +46,7 @@ Edit the "path" key in ContextSearch.json to point to the binary.  For example. 
 Download ContextSearch.py and ContextSearch.json
 ##### Step 2
 Make ContextSearch.py executable and move to desired location
+
 <code>chmod +x ContextSearch.py && mv ContextSearch.py /home/mclovin/bin</code>
 ##### Step 3
 Edit "path" key in ContextSearch.json to point to the python script.  For example. if you moved ContextSearch.py to  /home/mclovin/bin your ContextSearch.json would look like:
