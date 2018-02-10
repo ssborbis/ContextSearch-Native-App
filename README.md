@@ -3,8 +3,10 @@ Native App for use with ContextSearch web-ext
 
 This is a simple app written in both C and python that reads a requested file to base64 for webextensions processing.
 
+This app only runs when called by ContextSearch web-ext.  It does not run when Firefox is closed or when ContextSearch web-ext is not installed.
+
 ## Windows
-Grab the latest release and run the installer
+Grab the <b>[Latest Release](https://github.com/ssborbis/ContextSearch-Native-App/releases)</b> and run the installer
 
 The ContextSearch_installer.exe does the following
 
