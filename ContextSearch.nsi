@@ -40,6 +40,7 @@ File README.md
  
 # define uninstaller name
 WriteUninstaller $INSTDIR\uninstaller.exe
+WriteRegStr HKLM "SOFTWARE\Mozilla\NativeMessagingHosts\ContextSearch" '' '$INSTDIR\ContextSearch.json'
 SetRegView 64
 WriteRegStr HKLM "SOFTWARE\Mozilla\NativeMessagingHosts\ContextSearch" '' '$INSTDIR\ContextSearch.json'
 
@@ -91,6 +92,7 @@ Section "Uninstall"
  
 # Always delete uninstaller first
 Delete $INSTDIR\uninstaller.exe
+DeleteRegKey HKLM "SOFTWARE\Mozilla\NativeMessagingHosts\ContextSearch"
 SetRegView 64
 DeleteRegKey HKLM "SOFTWARE\Mozilla\NativeMessagingHosts\ContextSearch"
  
