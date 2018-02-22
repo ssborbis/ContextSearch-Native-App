@@ -25,9 +25,11 @@ OutFile "ContextSearch_installer.exe"
  
 # set desktop as install directory
 InstallDir $PROGRAMFILES\ContextSearch
+Name "ContextSearch Native App"
  
 # default section start
 Section
+
 
 SetDetailsView show
  
