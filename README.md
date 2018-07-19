@@ -1,4 +1,4 @@
-# ContextSearch-Native-App
+# ContextSearch-Native-App for Firefox
 Native App for use with ContextSearch web-ext
 
 This is a simple app written in both C and python that reads a requested file to base64 for webextensions processing.
