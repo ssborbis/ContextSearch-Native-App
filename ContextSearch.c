@@ -7,7 +7,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-#define _VERSION "1.2.0rc2"
+#define _VERSION "1.8.0"
 
 static char encoding_table[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
                                 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
@@ -149,7 +149,7 @@ int main(int argc, char *argv[])
 		sendMessage(message_content,0);
 		return 0;
 	}
-		
+			
 	struct stat buffer;
 	char mod_time[64];
  

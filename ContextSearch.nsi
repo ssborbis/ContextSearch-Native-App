@@ -55,7 +55,7 @@ FileWrite $0 '{$\n\
 	"description": "Sends base64 encoded search.json.mozlz4 file",$\n\
 	"path": "$modifiedInstDir\\ContextSearch.exe",$\n\
 	"type": "stdio",$\n\
-	"allowed_extensions": [ "{5dd73bb9-e728-4d1e-990b-c77d8e03670f}" ]$\n\
+	"allowed_extensions": [ "contextsearch.webext.native.messenger@ssborbis.addons.mozilla.org" ]$\n\
 }'
 FileClose $0
 
