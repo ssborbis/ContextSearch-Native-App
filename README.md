@@ -7,26 +7,44 @@ This app only runs when called by ContextSearch web-ext.  It does not run when t
 
 ## Linux / MacOS
 
-### Using Python 
+### Using Python3
+* Be sure to install python v3 before using the native app
+
 ##### Step 1
 Download ContextSearch.py and contextsearch_webext.json
 ##### Step 2
 Make ContextSearch.py executable and move to desired location ( where <i>mclovin</i> is your user name )
 
-<code>
-    mkdir /home/mclovin/bin
-    chmod +x ContextSearch.py && mv ContextSearch.py /home/mclovin/bin
-</code>
+```
+mkdir /home/mclovin/bin
+chmod +x ContextSearch.py && mv ContextSearch.py /home/mclovin/bin
+```
+
 ##### Step 3
 Edit "path" key in contextsearch_webext.json to point to the python script.  For example. if you moved ContextSearch.py to  /home/mclovin/bin your contextsearch_webext.json would look like:
 
 ```javascript
 {
-"name": "contextsearch_webext",
-"description": "Launch applications from ContextSearch-webext",
-"path": "/home/mclovin/bin/ContextSearch.py",
-"type": "stdio",
-"allowed_extensions": [ "{5dd73bb9-e728-4d1e-990b-c77d8e03670f}" ]
+    "name": "contextsearch_webext",
+    "description": "Launch applications from ContextSearch-webext",
+    "path": "/home/mclovin/bin/ContextSearch.py",
+    "type": "stdio",
+    "allowed_extensions": [ "{5dd73bb9-e728-4d1e-990b-c77d8e03670f}" ]
+}
+```
+
+Chrome requires a slightly different manifest.json
+
+```javascript
+{
+    "name": "contextsearch_webext",
+    "description": "Launches external application",
+    "path": "/home/mike/bin/ContextSearch.py",
+    "type": "stdio",
+    "allowed_origins": [ 
+        "chrome-extension://lnojieghgnojlhmnfpmeidigmjpkppep/",
+        "chrome-extension://ddippghibegbgpjcaaijbacfhjjeafjh/"
+    ]
 }
 ```
 
