@@ -52,12 +52,12 @@ Chrome requires a slightly different manifest.json
 Move contextsearch_webext.json to the location required by the browser's NativeMessaging API
 
 ###### Linux
-Firefox: ~/.mozilla/native-messaging-hosts/contextsearch_webext.json
-Google Chrome: ~/.config/google-chrome/NativeMessagingHosts/contextsearch_webext.json
-Chromium: ~/.config/chromium/NativeMessagingHosts/contextsearch_webext.json
+* Firefox: ~/.mozilla/native-messaging-hosts/contextsearch_webext.json
+* Google Chrome: ~/.config/google-chrome/NativeMessagingHosts/contextsearch_webext.json
+* Chromium: ~/.config/chromium/NativeMessagingHosts/contextsearch_webext.json
 
 ###### Mac OS X
-Firefox: ~/Library/Application Support/Mozilla/NativeMessagingHosts/contextsearch_webext.json
-Google Chrome: ~/Library/Application Support/Google/Chrome/NativeMessagingHosts/contextsearch_webext.json
-Chromium: ~/Library/Application Support/Chromium/NativeMessagingHosts/contextsearch_webext.json
+* Firefox: ~/Library/Application Support/Mozilla/NativeMessagingHosts/contextsearch_webext.json
+* Google Chrome: ~/Library/Application Support/Google/Chrome/NativeMessagingHosts/contextsearch_webext.json
+* Chromium: ~/Library/Application Support/Chromium/NativeMessagingHosts/contextsearch_webext.json
 
