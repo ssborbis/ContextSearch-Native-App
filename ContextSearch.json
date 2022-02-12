@@ -1,7 +1,0 @@
-{
-"name": "ContextSearch",
-"description": "Sends base64 encoded search.json.mozlz4 file",
-"path": "C:\\Users\\YOUR_USERNAME\\AppData\\Roaming\\ContextSearch\\ContextSearch.exe",
-"type": "stdio",
-"allowed_extensions": [ "contextsearch.webext.native.messenger@ssborbis.addons.mozilla.org" ]
-}
