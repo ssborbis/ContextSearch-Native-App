@@ -1,4 +1,4 @@
-# ContextSearch-Native-App for Firefox
+# ContextSearch-Native-App
 Native App for use with ContextSearch web-ext
 
 This is a simple app written python that launches external applications from ContextSearch web-ext.
