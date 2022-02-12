@@ -1,70 +1,29 @@
 # ContextSearch-Native-App for Firefox
 Native App for use with ContextSearch web-ext
 
-This is a simple app written in both C and python that reads a requested file to base64 for webextensions processing.
+This is a simple app written python that launches external applications from ContextSearch web-ext.
 
-This app only runs when called by ContextSearch web-ext.  It does not run when Firefox is closed or when ContextSearch web-ext is not installed.
+This app only runs when called by ContextSearch web-ext.  It does not run when the browser is closed or when ContextSearch web-ext is not installed.
 
-## Windows
-Grab the <b>[Latest Release](https://github.com/ssborbis/ContextSearch-Native-App/releases)</b> and run the installer
-
-The ContextSearch_installer.exe does the following
-
-Creates folder C:\Program Files (x86)\ContextSearch with the following files
-
-    ContextSearch.exe
-    ContextSearch.json
-    README.md
-    uninstaller.exe
-
-Adds the following key to the registry
-
-<code>HKLM\SOFTWARE\Mozilla\NativeMessagingHosts\ContextSearch</code>
-
-## Other OS
-
-### Using ContextSearch C binary 
-##### Step 1
-Download ContextSearch.c and ContextSearch.json
-##### Step 2
-Compile ContextSearch.c with gcc or an equivelent compiler and output to the desired location
-
-<code>gcc ContextSearch.c -o /home/mclovin/bin/ContextSearch</code>
-##### Step 3
-Edit the "path" key in ContextSearch.json to point to the binary.  For example. if you compiled ContextSearch to  /home/mclovin/bin your ContextSearch.json would look like:
-
-```javascript
-{
-"name": "ContextSearch",
-"description": "Sends base64 encoded search.json.mozlz4 file",
-"path": "/home/mclovin/bin/ContextSearch",
-"type": "stdio",
-"allowed_extensions": [ "{5dd73bb9-e728-4d1e-990b-c77d8e03670f}" ]
-}
-```
-##### Step 4
-Move ContextSearch.json to the location required by the Firefox NativeMessaging API
-
-###### Linux
-* ~/.mozilla/native-messaging-hosts/ContextSearch.json
-
-###### Mac OS X
-* ~/Library/Application Support/Mozilla/NativeMessagingHosts/ContextSearch.json
+## Linux / MacOS
 
 ### Using Python 
 ##### Step 1
-Download ContextSearch.py and ContextSearch.json
+Download ContextSearch.py and contextsearch_webext.json
 ##### Step 2
-Make ContextSearch.py executable and move to desired location
+Make ContextSearch.py executable and move to desired location ( where <i>mclovin</i> is your user name )
 
-<code>chmod +x ContextSearch.py && mv ContextSearch.py /home/mclovin/bin</code>
+<code>
+    mkdir /home/mclovin/bin
+    chmod +x ContextSearch.py && mv ContextSearch.py /home/mclovin/bin
+</code>
 ##### Step 3
-Edit "path" key in ContextSearch.json to point to the python script.  For example. if you moved ContextSearch.py to  /home/mclovin/bin your ContextSearch.json would look like:
+Edit "path" key in contextsearch_webext.json to point to the python script.  For example. if you moved ContextSearch.py to  /home/mclovin/bin your contextsearch_webext.json would look like:
 
 ```javascript
 {
-"name": "ContextSearch",
-"description": "Sends base64 encoded search.json.mozlz4 file",
+"name": "contextsearch_webext",
+"description": "Launch applications from ContextSearch-webext",
 "path": "/home/mclovin/bin/ContextSearch.py",
 "type": "stdio",
 "allowed_extensions": [ "{5dd73bb9-e728-4d1e-990b-c77d8e03670f}" ]
@@ -72,11 +31,15 @@ Edit "path" key in ContextSearch.json to point to the python script.  For exampl
 ```
 
 ##### Step 4
-Move ContextSearch.json to the location required by the Firefox NativeMessaging API
+Move contextsearch_webext.json to the location required by the browser's NativeMessaging API
 
 ###### Linux
-* ~/.mozilla/native-messaging-hosts/ContextSearch.json
+Firefox: ~/.mozilla/native-messaging-hosts/contextsearch_webext.json
+Google Chrome: ~/.config/google-chrome/NativeMessagingHosts/contextsearch_webext.json
+Chromium: ~/.config/chromium/NativeMessagingHosts/contextsearch_webext.json
 
 ###### Mac OS X
-* ~/Library/Application Support/Mozilla/NativeMessagingHosts/ContextSearch.json
+Firefox: ~/Library/Application Support/Mozilla/NativeMessagingHosts/contextsearch_webext.json
+Google Chrome: ~/Library/Application Support/Google/Chrome/NativeMessagingHosts/contextsearch_webext.json
+Chromium: ~/Library/Application Support/Chromium/NativeMessagingHosts/contextsearch_webext.json
 
