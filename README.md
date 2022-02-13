@@ -19,6 +19,7 @@ Move files to desired location ( where <i>mclovin</i> is your user name )
 ```
 mkdir "C:\Users\mclovin\AppData\Roaming\ContextSearch-webext"
 move ContextSearch.py "C:\Users\mclovin\AppData\Roaming\ContextSearch-webext"
+move contextsearch_webext.json "C:\Users\mclovin\AppData\Roaming\ContextSearch-webext"
 ```
 
 and update your registry
