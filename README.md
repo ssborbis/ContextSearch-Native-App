@@ -26,12 +26,12 @@ and update your registry
 
 Chrome
 ```
-REG ADD "HKCU\Software\Google\Chrome\NativeMessagingHosts\contextsearch_webext" /ve /t REG_SZ /d "C:\Users\mclovin\AppData\Roaming\ContextSearch-webext\ContextSearch.py" /f
+REG ADD "HKCU\Software\Google\Chrome\NativeMessagingHosts\contextsearch_webext" /ve /t REG_SZ /d "C:\Users\mclovin\AppData\Roaming\ContextSearch-webext\contextsearch_webext.json" /f
 ```
 
 Firefox
 ```
-REG ADD "HKCU\Software\Mozilla\NativeMessagingHosts\contextsearch_webext" /ve /t REG_SZ /d "C:\Users\mclovin\AppData\Roaming\ContextSearch-webext\ContextSearch.py" /f
+REG ADD "HKCU\Software\Mozilla\NativeMessagingHosts\contextsearch_webext" /ve /t REG_SZ /d "C:\Users\mclovin\AppData\Roaming\ContextSearch-webext\contextsearch_webext.json" /f
 ```
 
 ##### Step 3
