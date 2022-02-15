@@ -75,7 +75,7 @@ def installManifest(platform):
                 manifest_path = os.path.join(path, manifest_file)
 
             if platform == "windows":
-                manifest["path"] = os.path.join(os.path.expanduser("~/AppData/roaming/ContextSearch-webext/"), "ContextSearch.bat")
+                manifest["path"] = os.path.join(os.path.expanduser("~\\AppData\\Roaming\\ContextSearch-webext\\"), "ContextSearch.bat")
             else:
                 manifest["path"] = os.path.join(os.path.expanduser("~/ContextSearch-webext/"), binary_file)
 
