@@ -8,6 +8,8 @@ This app only runs when called by ContextSearch web-ext.  It does not run when t
 ### Using Python3
 * Be sure to install python v3 before using the native app
 
+Run install.py. In windows, ths should be done from an administrative command prompt.
+
 ## Windows
 
 ##### Step 1
