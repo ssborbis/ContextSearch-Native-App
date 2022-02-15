@@ -110,7 +110,7 @@ elif sys.platform == "darwin":
 elif sys.platform == "win32":
 	# windows
     installManifest("windows")
-    installBinary(os.path.expanduser("~/AppData/roaming/ContextSearch-webext/"))
+    installBinary(os.path.expanduser("~\\AppData\\Roaming\\ContextSearch-webext\\"))
 
     if use_bat_file:
         path = os.path.expanduser("~\\AppData\\Roaming\\ContextSearch-webext\\")
