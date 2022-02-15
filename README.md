@@ -5,13 +5,68 @@ This is a simple app written python that launches external applications from Con
 
 This app only runs when called by ContextSearch web-ext.  It does not run when the browser is closed or when ContextSearch web-ext is not installed.
 
-## Linux / MacOS
-
 ### Using Python3
 * Be sure to install python v3 before using the native app
 
+## Windows
+
 ##### Step 1
 Download ContextSearch.py and contextsearch_webext.json
+
+##### Step 2
+Move files to desired location ( where <i>mclovin</i> is your user name )
+
+```
+mkdir "C:\Users\mclovin\AppData\Roaming\ContextSearch-webext"
+move ContextSearch.py "C:\Users\mclovin\AppData\Roaming\ContextSearch-webext"
+move contextsearch_webext.json "C:\Users\mclovin\AppData\Roaming\ContextSearch-webext"
+```
+
+and update your registry
+
+Chrome
+```
+REG ADD "HKCU\Software\Google\Chrome\NativeMessagingHosts\contextsearch_webext" /ve /t REG_SZ /d "C:\Users\mclovin\AppData\Roaming\ContextSearch-webext\contextsearch_webext.json" /f
+```
+
+Firefox
+```
+REG ADD "HKCU\Software\Mozilla\NativeMessagingHosts\contextsearch_webext" /ve /t REG_SZ /d "C:\Users\mclovin\AppData\Roaming\ContextSearch-webext\contextsearch_webext.json" /f
+```
+
+##### Step 3
+Edit "path" key in contextsearch_webext.json to point to the python script.  For example. if you moved ContextSearch.py to  "C:\Users\mclovin\AppData\Roaming\ContextSearch-webext" your contextsearch_webext.json would look like:
+
+```javascript
+{
+    "name": "contextsearch_webext",
+    "description": "Launch applications from ContextSearch-webext",
+    "path": "C:\\Users\\mclovin\\AppData\\Roaming\\ContextSearch-webext\\ContextSearch.py",
+    "type": "stdio",
+    "allowed_extensions": [ "{5dd73bb9-e728-4d1e-990b-c77d8e03670f}" ]
+}
+```
+
+Chrome requires a slightly different manifest.json
+
+```javascript
+{
+    "name": "contextsearch_webext",
+    "description": "Launches external application",
+    "path": "C:\\Users\\mclovin\\AppData\\Roaming\\ContextSearch-webext\\ContextSearch.py",
+    "type": "stdio",
+    "allowed_origins": [ 
+        "chrome-extension://lnojieghgnojlhmnfpmeidigmjpkppep/",
+        "chrome-extension://ddippghibegbgpjcaaijbacfhjjeafjh/"
+    ]
+}
+```
+
+## Linux / MacOS
+
+##### Step 1
+Download ContextSearch.py and contextsearch_webext.json
+
 ##### Step 2
 Make ContextSearch.py executable and move to desired location ( where <i>mclovin</i> is your user name )
 
@@ -52,12 +107,30 @@ Chrome requires a slightly different manifest.json
 Move contextsearch_webext.json to the location required by the browser's NativeMessaging API
 
 ###### Linux
-* Firefox: ~/.mozilla/native-messaging-hosts/contextsearch_webext.json
-* Google Chrome: ~/.config/google-chrome/NativeMessagingHosts/contextsearch_webext.json
-* Chromium: ~/.config/chromium/NativeMessagingHosts/contextsearch_webext.json
+* Firefox: 
+```
+~/.mozilla/native-messaging-hosts/contextsearch_webext.json
+```
+* Google Chrome: 
+```
+~/.config/google-chrome/NativeMessagingHosts/contextsearch_webext.json
+```
+* Chromium: 
+```
+~/.config/chromium/NativeMessagingHosts/contextsearch_webext.json
+```
 
 ###### Mac OS X
-* Firefox: ~/Library/Application Support/Mozilla/NativeMessagingHosts/contextsearch_webext.json
-* Google Chrome: ~/Library/Application Support/Google/Chrome/NativeMessagingHosts/contextsearch_webext.json
-* Chromium: ~/Library/Application Support/Chromium/NativeMessagingHosts/contextsearch_webext.json
+* Firefox: 
+```
+~/Library/Application Support/Mozilla/NativeMessagingHosts/contextsearch_webext.json
+```
+* Google Chrome: 
+```
+~/Library/Application Support/Google/Chrome/NativeMessagingHosts/contextsearch_webext.json
+```
+* Chromium: 
+```
+~/Library/Application Support/Chromium/NativeMessagingHosts/contextsearch_webext.json
+```
 
