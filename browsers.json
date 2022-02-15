@@ -1,0 +1,105 @@
+[
+  {
+    "name": "Firefox",
+    "platforms": {
+      "linux": {
+        "global_config_path": "/usr/lib/mozilla/native-messaging-hosts/",
+        "user_config_path": "~/.mozilla/native-messaging-hosts/"
+      },
+      "macOS": {
+        "global_config_path": "/Library/Application Support/Mozilla/NativeMessagingHosts/",
+        "user_config_path": "~/Library/Application Support/Mozilla/NativeMessagingHosts/"
+      },
+      "windows": {
+        "user_config_path": "~\\AppData\\Roaming\\ContextSearch-webext\\",
+        "registry_keys": [
+          "HKEY_CURRENT_USER\\Software\\Mozilla\\NativeMessagingHosts\\contextsearch_webext",
+          "HKEY_LOCAL_MACHINE\\Software\\Mozilla\\NativeMessagingHosts\\contextsearch_webext"
+        ]
+      }
+    },
+    "manifest":{
+        "allowed_extensions": [ 
+            "{5dd73bb9-e728-4d1e-990b-c77d8e03670f}" 
+        ]
+    }
+  },
+  {
+    "name": "Chrome",
+    "platforms": {
+      "linux": {
+        "global_config_path": "/etc/opt/chrome/native-messaging-hosts/",
+        "user_config_path": "~/.config/google-chrome/NativeMessagingHosts/"
+      },
+      "macOS": {
+        "global_config_path": "/Library/Google/Chrome/NativeMessagingHosts/",
+        "user_config_path": "~/Library/Application Support/Google/Chrome/NativeMessagingHosts/"
+      },
+      "windows": {
+        "user_config_path": "~\\AppData\\Roaming\\ContextSearch-webext\\",
+        "registry_keys": [
+          "HKEY_LOCAL_MACHINE\\SOFTWARE\\Google\\Chrome\\NativeMessagingHosts\\contextsearch_webext",
+          "HKEY_CURRENT_USER\\SOFTWARE\\Google\\Chrome\\NativeMessagingHosts\\contextsearch_webext"
+        ]
+      }
+    },
+    "manifest": {
+        "allowed_origins": [ 
+            "chrome-extension://lnojieghgnojlhmnfpmeidigmjpkppep/",
+            "chrome-extension://ddippghibegbgpjcaaijbacfhjjeafjh/"
+        ]
+    }
+  },
+  {
+    "name": "Chromium",
+    "platforms": {
+      "linux": {
+        "global_config_path": "/etc/chromium/native-messaging-hosts/",
+        "user_config_path": "~/.config/chromium/NativeMessagingHosts/"
+      },
+      "macOS": {
+        "global_config_path": "/Library/Application Support/Chromium/NativeMessagingHosts/",
+        "user_config_path": "~/Library/Application Support/Chromium/NativeMessagingHosts/"
+      },
+      "windows": {
+        "user_config_path": "~\\AppData\\Roaming\\ContextSearch-webext\\",
+        "registry_keys": [
+          "HKEY_LOCAL_MACHINE\\SOFTWARE\\Google\\Chrome\\NativeMessagingHosts\\contextsearch_webext",
+          "HKEY_CURRENT_USER\\SOFTWARE\\Google\\Chrome\\NativeMessagingHosts\\contextsearch_webext"
+        ]
+      }
+    },
+    "manifest": {
+        "allowed_origins": [ 
+            "chrome-extension://lnojieghgnojlhmnfpmeidigmjpkppep/",
+            "chrome-extension://ddippghibegbgpjcaaijbacfhjjeafjh/"
+        ]
+    }
+  },
+  {
+    "name": "Edge",
+    "platforms": {
+      "linux": {
+        "user_config_path": "~/.config/microsoft-edge/NativeMessagingHosts/",
+        "global_config_path": "/etc/opt/edge/native-messaging-hosts/"
+      },
+      "macOS": {
+        "global_config_path": "/Library/Microsoft/Edge/NativeMessagingHosts/",
+        "user_config_path": "~/Library/Application Support/Microsoft Edge/NativeMessagingHosts/"
+      },
+      "windows": {
+        "user_config_path": "~\\AppData\\Roaming\\ContextSearch-webext\\",
+        "registry_keys": [
+          "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Edge\\NativeMessagingHosts\\contextsearch_webext",
+          "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Edge\\NativeMessagingHosts\\contextsearch_webext"
+        ]
+      }
+    },
+     "manifest": {
+        "allowed_origins": [ 
+            "chrome-extension://lnojieghgnojlhmnfpmeidigmjpkppep/",
+            "chrome-extension://ddippghibegbgpjcaaijbacfhjjeafjh/"
+        ]
+    }
+  }
+]
