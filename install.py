@@ -14,12 +14,17 @@ manifest_template = {
 
 manifest_file = "contextsearch_webext.json"
 binary_file = "ContextSearch.py"
-use_bat_file = True
+install_global = False
 
 browsers = json.load(open('browsers.json'))
 
-def installRegistryKeys(key, manifest_path):
+def installRegistryKey(key, manifest_path):
     cmd = "REG ADD " + key + " /ve /t REG_SZ /d \"" + manifest_path + "\" /f"
+    print(cmd)
+    os.system(cmd)
+
+def uninstalRegistryKey(key):
+    cmd = "REG DELETE " + key + " /va /f"
     print(cmd)
     os.system(cmd)
 
@@ -90,8 +95,8 @@ def installManifest(platform):
                 print(error)
 
         if platform == "windows":
-            for key in b["platforms"][platform]["registry_keys"]:
-                installRegistryKeys(key, manifest_path)
+            for key in b["platforms"][platform]["registry_keys_user"]:
+                installRegistryKey(key, manifest_path)
 
 if sys.platform == "linux" or sys.platform == "linux2":
     # linux
@@ -112,15 +117,11 @@ elif sys.platform == "win32":
     installManifest("windows")
     installBinary(os.path.expanduser("~\\AppData\\Roaming\\ContextSearch-webext\\"))
 
-    if use_bat_file:
-        path = os.path.expanduser("~\\AppData\\Roaming\\ContextSearch-webext\\")
-        bat_path = os.path.join(path, "ContextSearch.bat")
-        with open( bat_path, 'w' ) as f:
-            f.write("@echo off\r\n")
-            f.write("\"" + sys.executable + "\" -u " + binary_file + "\r\n")
-        f.close()
+    path = os.path.expanduser("~\\AppData\\Roaming\\ContextSearch-webext\\")
+    bat_path = os.path.join(path, "ContextSearch.bat")
+    with open( bat_path, 'w' ) as f:
+        f.write("@echo off\r\n")
+        f.write("\"" + sys.executable + "\" -u " + binary_file + "\r\n")
+    f.close()
 
     sys.exit(0)
-
-
-

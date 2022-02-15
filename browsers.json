@@ -12,8 +12,10 @@
       },
       "windows": {
         "user_config_path": "~\\AppData\\Roaming\\ContextSearch-webext\\",
-        "registry_keys": [
-          "HKEY_CURRENT_USER\\Software\\Mozilla\\NativeMessagingHosts\\contextsearch_webext",
+        "registry_keys_user": [
+          "HKEY_CURRENT_USER\\Software\\Mozilla\\NativeMessagingHosts\\contextsearch_webext"
+        ],
+        "registry_keys_global":[
           "HKEY_LOCAL_MACHINE\\Software\\Mozilla\\NativeMessagingHosts\\contextsearch_webext"
         ]
       }
@@ -37,8 +39,10 @@
       },
       "windows": {
         "user_config_path": "~\\AppData\\Roaming\\ContextSearch-webext\\",
-        "registry_keys": [
-          "HKEY_LOCAL_MACHINE\\SOFTWARE\\Google\\Chrome\\NativeMessagingHosts\\contextsearch_webext",
+        "registry_keys_user": [
+          "HKEY_LOCAL_MACHINE\\SOFTWARE\\Google\\Chrome\\NativeMessagingHosts\\contextsearch_webext"
+        ],
+        "registry_keys_global":[
           "HKEY_CURRENT_USER\\SOFTWARE\\Google\\Chrome\\NativeMessagingHosts\\contextsearch_webext"
         ]
       }
@@ -63,8 +67,10 @@
       },
       "windows": {
         "user_config_path": "~\\AppData\\Roaming\\ContextSearch-webext\\",
-        "registry_keys": [
-          "HKEY_LOCAL_MACHINE\\SOFTWARE\\Google\\Chrome\\NativeMessagingHosts\\contextsearch_webext",
+        "registry_keys_user": [
+          "HKEY_LOCAL_MACHINE\\SOFTWARE\\Google\\Chrome\\NativeMessagingHosts\\contextsearch_webext"
+        ],
+        "registry_keys_global":[
           "HKEY_CURRENT_USER\\SOFTWARE\\Google\\Chrome\\NativeMessagingHosts\\contextsearch_webext"
         ]
       }
@@ -89,8 +95,10 @@
       },
       "windows": {
         "user_config_path": "~\\AppData\\Roaming\\ContextSearch-webext\\",
-        "registry_keys": [
-          "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Edge\\NativeMessagingHosts\\contextsearch_webext",
+        "registry_keys_user": [
+          "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Edge\\NativeMessagingHosts\\contextsearch_webext"
+        ],
+        "registry_keys_global":[
           "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Edge\\NativeMessagingHosts\\contextsearch_webext"
         ]
       }
