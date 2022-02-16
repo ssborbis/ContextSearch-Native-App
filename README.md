@@ -10,7 +10,7 @@ Be sure to install [Python3](https://www.python.org/downloads/) before using the
 
 ---
 
-## Using Installer
+## Using the Installer
 Download the source code and run install.py
 
 ---
