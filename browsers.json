@@ -40,10 +40,10 @@
       "windows": {
         "user_config_path": "~\\AppData\\Roaming\\ContextSearch-webext\\",
         "registry_keys_user": [
-          "HKEY_LOCAL_MACHINE\\SOFTWARE\\Google\\Chrome\\NativeMessagingHosts\\contextsearch_webext"
+          "HKEY_CURRENT_USER\\SOFTWARE\\Google\\Chrome\\NativeMessagingHosts\\contextsearch_webext"  
         ],
         "registry_keys_global":[
-          "HKEY_CURRENT_USER\\SOFTWARE\\Google\\Chrome\\NativeMessagingHosts\\contextsearch_webext"
+          "HKEY_LOCAL_MACHINE\\SOFTWARE\\Google\\Chrome\\NativeMessagingHosts\\contextsearch_webext"
         ]
       }
     },
@@ -68,10 +68,10 @@
       "windows": {
         "user_config_path": "~\\AppData\\Roaming\\ContextSearch-webext\\",
         "registry_keys_user": [
-          "HKEY_LOCAL_MACHINE\\SOFTWARE\\Google\\Chrome\\NativeMessagingHosts\\contextsearch_webext"
-        ],
-        "registry_keys_global":[
           "HKEY_CURRENT_USER\\SOFTWARE\\Google\\Chrome\\NativeMessagingHosts\\contextsearch_webext"
+        ],
+        "registry_keys_global":[ 
+          "HKEY_LOCAL_MACHINE\\SOFTWARE\\Google\\Chrome\\NativeMessagingHosts\\contextsearch_webext"
         ]
       }
     },
