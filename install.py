@@ -14,6 +14,8 @@ manifest_template = {
 
 manifest_file = "contextsearch_webext.json"
 binary_file = "ContextSearch.py"
+windows_install_path = "~\\AppData\\Roaming\\ContextSearch-webext\\"
+nix_install_path = "~/ContextSearch-webext/"
 install_global = False
 
 browsers = json.load(open('browsers.json'))
@@ -80,9 +82,9 @@ def installManifest(platform):
                 manifest_path = os.path.join(path, manifest_file)
 
             if platform == "windows":
-                manifest["path"] = os.path.join(os.path.expanduser("~\\AppData\\Roaming\\ContextSearch-webext\\"), "ContextSearch.bat")
+                manifest["path"] = os.path.join(os.path.expanduser(windows_install_path), "ContextSearch.bat")
             else:
-                manifest["path"] = os.path.join(os.path.expanduser("~/ContextSearch-webext/"), binary_file)
+                manifest["path"] = os.path.join(os.path.expanduser(nix_install_path), binary_file)
 
             try:
                 print("Installing manifest -> ", manifest_path)
@@ -101,23 +103,23 @@ def installManifest(platform):
 if sys.platform == "linux" or sys.platform == "linux2":
     # linux
     installManifest("linux")
-    installBinary(os.path.expanduser("~/ContextSearch-webext/"))
+    installBinary(os.path.expanduser(nix_install_path))
 
     sys.exit(0)
 
 elif sys.platform == "darwin":
     # OS X
     installManifest("macOS")
-    installBinary(os.path.expanduser("~/ContextSearch-webext/"))
+    installBinary(os.path.expanduser(nix_install_path))
 
     sys.exit(0)
 
 elif sys.platform == "win32":
 	# windows
     installManifest("windows")
-    installBinary(os.path.expanduser("~\\AppData\\Roaming\\ContextSearch-webext\\"))
+    installBinary(os.path.expanduser(windows_install_path))
 
-    path = os.path.expanduser("~\\AppData\\Roaming\\ContextSearch-webext\\")
+    path = os.path.expanduser(windows_install_path)
     bat_path = os.path.join(path, "ContextSearch.bat")
     with open( bat_path, 'w' ) as f:
         f.write("@echo off\r\n")
