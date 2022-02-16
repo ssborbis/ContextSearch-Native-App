@@ -71,7 +71,8 @@ Chrome requires a slightly different manifest.json
 }
 ```
 
-Windows does not always recognize `ContextSearch.py` as an executable, and may not work unless called from a `.bat` file.
+<br>
+<b>Windows does not always recognize `ContextSearch.py` as an executable, and may not work unless called from a `.bat` file.</b>
 
 ##### Step 4 ( if necessary )
 Create a new file named `ContextSearch.bat` in the `C:\Users\mclovin\AppData\Roaming\ContextSearch-webext` folder with the following content
