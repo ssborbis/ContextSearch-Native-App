@@ -14,6 +14,7 @@ manifest_template = {
 
 manifest_file = "contextsearch_webext.json"
 binary_file = "ContextSearch.py"
+bat_file = "ContextSearch.bat"
 windows_install_path = "~\\AppData\\Roaming\\ContextSearch-webext\\"
 nix_install_path = "~/ContextSearch-webext/"
 install_global = False
@@ -53,7 +54,7 @@ def installManifest(platform):
         path_browser_specific = os.path.join(path, b["name"])
         parent_path = os.path.abspath(os.path.join(path, os.pardir)) 
         if os.path.isdir(parent_path):
-            print('Found', b["name"])
+            print('Installing for', b["name"])
             print()
 
             try:
@@ -82,12 +83,12 @@ def installManifest(platform):
                 manifest_path = os.path.join(path, manifest_file)
 
             if platform == "windows":
-                manifest["path"] = os.path.join(os.path.expanduser(windows_install_path), "ContextSearch.bat")
+                manifest["path"] = os.path.join(os.path.expanduser(windows_install_path), bat_file)
             else:
                 manifest["path"] = os.path.join(os.path.expanduser(nix_install_path), binary_file)
 
             try:
-                print("Installing manifest -> ", manifest_path)
+                print(manifest_path)
                 print()
                 with open( manifest_path, 'w', encoding='utf-8') as f:
                     json.dump(manifest, f, ensure_ascii=False, indent=4)
@@ -120,7 +121,7 @@ elif sys.platform == "win32":
     installBinary(os.path.expanduser(windows_install_path))
 
     path = os.path.expanduser(windows_install_path)
-    bat_path = os.path.join(path, "ContextSearch.bat")
+    bat_path = os.path.join(path, bat_file)
     with open( bat_path, 'w' ) as f:
         f.write("@echo off\r\n")
         f.write("\"" + sys.executable + "\" -u " + binary_file + "\r\n")
