@@ -1,16 +1,19 @@
-# ContextSearch-Native-App
+## ContextSearch-Native-App
 Native App for use with ContextSearch web-ext
 
 This is a simple app written python that launches external applications from ContextSearch web-ext.
 
 This app only runs when called by ContextSearch web-ext.  It does not run when the browser is closed or when ContextSearch web-ext is not installed.
 
-### Using Python3
-* Be sure to install python v3 before using the native app
+### Requires Python3
+Be sure to install [Python3](https://www.python.org/downloads/) before using the native app
 
+---
 
 ## Using Installer
-Run install.py
+Download the source code and run install.py
+
+---
 
 ## Manual Install
 
@@ -67,6 +70,22 @@ Chrome requires a slightly different manifest.json
     ]
 }
 ```
+
+Windows does not always recognize `ContextSearch.py` as an executable, and may not work unless called from a `.bat` file.
+
+##### Step 4 ( if necessary )
+Create a new file named `ContextSearch.bat` in the `C:\Users\mclovin\AppData\Roaming\ContextSearch-webext` folder with the following content
+```
+@echo off
+C:\Users\MYNAME\AppData\Local\Programs\Python\Python309\python.exe ContextSearch.py
+```
+
+change the Python path to wherever your python.exe is installed
+
+##### Step 5 ( if necessary )
+Change the `path` in `contextsearch_webext.json` to `"path": "C:\\Users\\mclovin\\AppData\\Roaming\\ContextSearch-webext\\ContextSearch.bat"`
+
+---
 
 ### Linux / MacOS
 
