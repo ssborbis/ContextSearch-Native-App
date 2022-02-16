@@ -86,8 +86,9 @@
     "name": "Edge",
     "platforms": {
       "linux": {
-        "user_config_path": "~/.config/microsoft-edge/NativeMessagingHosts/",
-        "global_config_path": "/etc/opt/edge/native-messaging-hosts/"
+        "global_config_path": "/etc/opt/edge/native-messaging-hosts/",
+        "user_config_path": "~/.config/microsoft-edge/NativeMessagingHosts/"
+        
       },
       "macOS": {
         "global_config_path": "/Library/Microsoft/Edge/NativeMessagingHosts/",
@@ -104,6 +105,34 @@
       }
     },
      "manifest": {
+        "allowed_origins": [ 
+            "chrome-extension://lnojieghgnojlhmnfpmeidigmjpkppep/",
+            "chrome-extension://ddippghibegbgpjcaaijbacfhjjeafjh/"
+        ]
+    }
+  },
+  {
+    "name": "Vivaldi",
+    "platforms": {
+      "linux": {
+        "global_config_path": "/etc/vivaldi/native-messaging-hosts/",
+        "user_config_path": "~/.config/vivaldi/NativeMessagingHosts/"
+      },
+      "macOS": {
+        "global_config_path": "/Library/Application Support/Vivaldi/NativeMessagingHosts/",
+        "user_config_path": "~/Library/Application Support/Vivaldi/NativeMessagingHosts/"
+      },
+      "windows": {
+        "user_config_path": "~\\AppData\\Roaming\\ContextSearch-webext\\",
+        "registry_keys_user": [
+          "HKEY_CURRENT_USER\\SOFTWARE\\Google\\Chrome\\NativeMessagingHosts\\contextsearch_webext"
+        ],
+        "registry_keys_global":[ 
+          "HKEY_LOCAL_MACHINE\\SOFTWARE\\Google\\Chrome\\NativeMessagingHosts\\contextsearch_webext"
+        ]
+      }
+    },
+    "manifest": {
         "allowed_origins": [ 
             "chrome-extension://lnojieghgnojlhmnfpmeidigmjpkppep/",
             "chrome-extension://ddippghibegbgpjcaaijbacfhjjeafjh/"
