@@ -8,9 +8,13 @@ This app only runs when called by ContextSearch web-ext.  It does not run when t
 ### Using Python3
 * Be sure to install python v3 before using the native app
 
+
+## Using Installer
 Run install.py
 
-## Windows
+## Manual Install
+
+### Windows
 
 ##### Step 1
 Download ContextSearch.py and contextsearch_webext.json
@@ -64,7 +68,7 @@ Chrome requires a slightly different manifest.json
 }
 ```
 
-## Linux / MacOS
+### Linux / MacOS
 
 ##### Step 1
 Download ContextSearch.py and contextsearch_webext.json
