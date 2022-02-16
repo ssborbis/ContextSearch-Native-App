@@ -26,7 +26,7 @@ def installRegistryKey(key, manifest_path):
     print(cmd)
     os.system(cmd)
 
-def uninstalRegistryKey(key):
+def uninstallRegistryKey(key):
     cmd = "REG DELETE " + key + " /va /f"
     print(cmd)
     os.system(cmd)
@@ -100,6 +100,17 @@ def installManifest(platform):
         if platform == "windows":
             for key in b["platforms"][platform]["registry_keys_user"]:
                 installRegistryKey(key, manifest_path)
+
+if len(sys.argv) == 2 and sys.argv[1] == "--uninstall":
+    if sys.platform == "win32":
+        for b in browsers:
+            for key in b["platforms"]["windows"]["registry_keys_user"]:
+                print("removing registry key", key)
+                uninstallRegistryKey(key)
+            for key in b["platforms"]["windows"]["registry_keys_global"]:
+                print("removing registry key", key)
+                uninstallRegistryKey(key)
+    sys.exit(0)
 
 if sys.platform == "linux" or sys.platform == "linux2":
     # linux
