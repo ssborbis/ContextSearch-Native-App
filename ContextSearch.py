@@ -8,6 +8,7 @@ import json
 import sys
 import struct
 import os
+import subprocess
 
 # Read a message from stdin and decode it.
 def get_message():
@@ -39,8 +40,8 @@ if not message.get("verify") is None:
     sys.exit(0)
 
 if not message.get("path") is None:
-    os.system(message["path"])
-    send_message(encode_message(True))
+    returnVal = subprocess.call(message["path"], shell=True, stdout=subprocess.DEVNULL, stdin=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    send_message(encode_message(returnVal))
     sys.exit(0)
 
 send_message(encode_message(False))
