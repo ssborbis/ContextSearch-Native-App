@@ -42,7 +42,9 @@ if not message.get("verify") is None:
 if not message.get("path") is None:
     #returnVal = subprocess.call(message["path"], shell=True, stdout=subprocess.DEVNULL, stdin=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     #send_message(encode_message(returnVal))
-    subprocess.check_output(message["path"], shell=True).decode()
+    cwd = message.get("cwd") or "."
+    subprocess.check_output(message["path"], cwd=cwd, shell=True).decode()
+    send_message(encode_message(True))
     sys.exit(0)
 
 send_message(encode_message(False))
