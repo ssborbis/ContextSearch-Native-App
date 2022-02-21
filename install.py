@@ -12,22 +12,22 @@ manifest_template = {
     "type": "stdio"
 }
 
-manifest_file = "contextsearch_webext.json"
-binary_file = "ContextSearch.py"
-bat_file = "ContextSearch.bat"
-windows_install_path = "~\\AppData\\Roaming\\ContextSearch-webext\\"
-nix_install_path = "~/ContextSearch-webext/"
-install_global = False
+manifest_file           = "contextsearch_webext.json"
+binary_file             = "ContextSearch.py"
+bat_file                = "ContextSearch.bat"
+windows_install_path    = "~\\AppData\\Roaming\\ContextSearch-webext\\"
+nix_install_path        = "~/ContextSearch-webext/"
+install_global          = False
 
 browsers = json.load(open('browsers.json'))
 
 def installRegistryKey(key, manifest_path):
-    cmd = "REG ADD " + key + " /ve /t REG_SZ /d \"" + manifest_path + "\" /f"
+    cmd = 'REG ADD %s /ve /t REG_SZ /d "%s" /f' % ( key, manifest_path )
     print(cmd)
     os.system(cmd)
 
 def uninstallRegistryKey(key):
-    cmd = "REG DELETE " + key + " /va /f"
+    cmd = 'REG DELETE %s /va /f' % ( key )
     print(cmd)
     os.system(cmd)
 
