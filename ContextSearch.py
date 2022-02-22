@@ -11,7 +11,7 @@ import os
 import subprocess
 import requests
 
-VERSION = "2.01"
+VERSION = "2.02"
 REMOTE_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/ContextSearch.py"
 LATEST_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/version.json"
 
@@ -44,7 +44,7 @@ def check_for_update():
     latest_version = response.json()["version"]
 
     if ( version.parse(latest_version) > version.parse(VERSION)):
-        return True
+        return latest_version
     else:
         return False
 
