@@ -3,8 +3,9 @@
 import os
 import sys
 import json
-import shutil
 import copy
+import urllib.request
+
 
 manifest_template = {
     "name": "contextsearch_webext",
@@ -15,11 +16,30 @@ manifest_template = {
 manifest_file           = "contextsearch_webext.json"
 binary_file             = "ContextSearch.py"
 bat_file                = "ContextSearch.bat"
+browsers_file           = "browsers.json"
 windows_install_path    = "~\\AppData\\Roaming\\ContextSearch-webext\\"
 nix_install_path        = "~/ContextSearch-webext/"
 install_global          = False
 
-browsers = json.load(open('browsers.json'))
+repository_path         = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/"
+
+def loadLocalThenRemote(local_path, remote_path):
+    try:
+        if os.path.exists(local_path):
+            return open(local_path).read()
+        else:
+            print(local_path, "No local file. Fetching remote ...")
+            response = urllib.request.urlopen(remote_path)
+            return response.read().decode("utf-8")
+    except Exception as e:
+        print("Cannot load", local_path, " - aborting install")
+        sys.exit(1)
+
+def loadBrowsers():
+    return json.loads(loadLocalThenRemote(browsers_file, repository_path + browsers_file))
+
+def loadBinary():
+    return loadLocalThenRemote(binary_file, repository_path + binary_file)
 
 def installRegistryKey(key, manifest_path):
     cmd = 'REG ADD %s /ve /t REG_SZ /d "%s" /f' % ( key, manifest_path )
@@ -43,12 +63,13 @@ def installBinary(path):
         return
 
     try:
-        shutil.copyfile(binary_file, os.path.join(path, binary_file))
+        with open(os.path.join(path, binary_file), "w" ) as f:
+            f.write(loadBinary())     
     except OSError as error:
         print(error)
 
 def installManifest(platform):
-    for b in browsers:
+    for b in loadBrowsers():
         print()
         path = os.path.expanduser(b["platforms"][platform]["user_config_path"])
         path_browser_specific = os.path.join(path, b["name"])
@@ -103,7 +124,7 @@ def installManifest(platform):
 
 if len(sys.argv) == 2 and sys.argv[1] == "--uninstall":
     if sys.platform == "win32":
-        for b in browsers:
+        for b in loadBrowsers():
             for key in b["platforms"]["windows"]["registry_keys_user"]:
                 print("removing registry key", key)
                 uninstallRegistryKey(key)
@@ -127,7 +148,7 @@ elif sys.platform == "darwin":
     sys.exit(0)
 
 elif sys.platform == "win32":
-	# windows
+    # windows
     installManifest("windows")
     installBinary(os.path.expanduser(windows_install_path))
 

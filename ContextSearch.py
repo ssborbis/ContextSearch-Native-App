@@ -9,9 +9,9 @@ import sys
 import struct
 import os
 import subprocess
-import requests
+import urllib.request
 
-VERSION = "2.06"
+VERSION = "2.07"
 REMOTE_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/ContextSearch.py"
 LATEST_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/version.json"
 
@@ -40,8 +40,9 @@ def send_message(encoded_message):
 
 def check_for_update():
     from packaging import version
-    response = requests.get(LATEST_URL)
-    latest_version = response.json()["version"]
+    response = urllib.request.urlopen(LATEST_URL)
+    js = json.reads(response.read().decode("utf-8"))
+    latest_version = js["version"]
 
     if ( version.parse(latest_version) > version.parse(VERSION)):
         return latest_version
@@ -49,13 +50,11 @@ def check_for_update():
         return False
 
 def update():
-    response = requests.get(REMOTE_URL)
-    remote_script = response.content
+    response = urllib.request.urlopen(REMOTE_URL)
+    remote_script = response.read().decode("utf-8")
 
     with open(os.path.realpath(__file__), 'wb') as f:
         f.write(remote_script);
-
-    f.close()
 
 message = get_message()
 
