@@ -11,7 +11,7 @@ import os
 import subprocess
 import requests
 
-VERSION = "2.02"
+VERSION = "2.03"
 REMOTE_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/ContextSearch.py"
 LATEST_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/version.json"
 
