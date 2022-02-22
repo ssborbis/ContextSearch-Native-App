@@ -53,9 +53,9 @@ def update():
     remote_script = response.content
 
     with open(os.path.realpath(__file__)) as f:
-        file.write(remote_script);
+        f.write(remote_script);
 
-    file.close()
+    f.close()
 
 message = get_message()
 
