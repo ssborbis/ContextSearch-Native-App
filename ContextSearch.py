@@ -45,7 +45,7 @@ if not message.get("path") is None:
     cwd = os.path.expanduser(cwd)
     output = subprocess.check_output(message["path"], cwd=cwd, shell=True).decode()
     
-    if message["return_output"]:
+    if message["return_stdout"]:
         send_message(encode_message(output))
     else:
         send_message(encode_message(True))
