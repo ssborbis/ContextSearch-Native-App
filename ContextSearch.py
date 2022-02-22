@@ -9,6 +9,11 @@ import sys
 import struct
 import os
 import subprocess
+import requests
+
+VERSION = "2.01"
+REMOTE_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/ContextSearch.py"
+LATEST_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/version.json"
 
 # Read a message from stdin and decode it.
 def get_message():
@@ -33,10 +38,39 @@ def send_message(encoded_message):
     sys.stdout.buffer.write(encoded_message['content'])
     sys.stdout.buffer.flush()
 
+def check_for_update():
+    from packaging import version
+    response = requests.get(LATEST_URL)
+    latest_version = response.json()["version"]
+
+    if ( version.parse(latest_version) > version.parse(VERSION)):
+        return True
+    else:
+        return False
+
+def update():
+    response = requests.get(REMOTE_URL)
+    remote_script = response.content
+
+    with open(os.path.realpath(__file__)) as f:
+        file.write(remote_script);
+
 message = get_message()
 
 if not message.get("verify") is None:
     send_message(encode_message(True))
+    sys.exit(0)
+
+if not message.get("version") is None:
+    send_message(encode_message(VERSION))
+    sys.exit(0)
+
+if not message.get("checkForUpdate") is None:
+    send_message(encode_message(check_for_update()))
+    sys.exit(0)
+
+if not message.get("update") is None:
+    update()
     sys.exit(0)
 
 if not message.get("path") is None:
