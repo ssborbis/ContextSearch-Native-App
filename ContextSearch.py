@@ -71,6 +71,7 @@ if not message.get("checkForUpdate") is None:
 
 if not message.get("update") is None:
     update()
+    send_message(encode_message(True))
     sys.exit(0)
 
 if not message.get("path") is None:
