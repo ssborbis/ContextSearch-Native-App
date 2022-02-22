@@ -5,8 +5,8 @@ This is a simple app written python that launches external applications from Con
 
 This app only runs when called by ContextSearch web-ext.  It does not run when the browser is closed or when ContextSearch web-ext is not installed.
 
-### Requires Python3
-Be sure to install [Python3](https://www.python.org/downloads/) before using the native app
+### Requires Python 3
+Be sure to install [Python 3](https://www.python.org/downloads/) before using the native app
 
 ---
 
