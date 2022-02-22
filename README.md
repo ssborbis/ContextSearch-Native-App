@@ -11,7 +11,7 @@ Be sure to install [Python3](https://www.python.org/downloads/) before using the
 ---
 
 ## Using the Installer ( easy way )
-Download and run [install.py](https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/install.py)
+Download and run <a href="https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/install.py" download>install.py</a>
 
 
 ---
