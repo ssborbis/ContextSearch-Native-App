@@ -6,7 +6,6 @@ import json
 import copy
 import urllib.request
 
-
 manifest_template = {
     "name": "contextsearch_webext",
     "description": "Launches external application",

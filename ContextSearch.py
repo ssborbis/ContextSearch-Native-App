@@ -11,9 +11,10 @@ import os
 import subprocess
 import urllib.request
 
-VERSION = "2.09"
-REMOTE_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/ContextSearch.py"
-LATEST_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/version.json"
+__version__ = "2.09"
+
+BINARY_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/ContextSearch.py"
+VERSION_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/version.json"
 
 # Read a message from stdin and decode it.
 def get_message():
@@ -39,17 +40,17 @@ def send_message(encoded_message):
     sys.stdout.buffer.flush()
 
 def check_for_update():
-    response = urllib.request.urlopen(LATEST_URL)
+    response = urllib.request.urlopen(VERSION_URL)
     js = json.loads(response.read().decode("utf-8"))
     latest_version = js["version"]
 
-    if ( float(latest_version) > float(VERSION)):
+    if ( float(latest_version) > float(__version__)):
         return latest_version
     else:
         return False
 
 def update():
-    response = urllib.request.urlopen(REMOTE_URL)
+    response = urllib.request.urlopen(BINARY_URL)
     remote_script = response.read().decode("utf-8")
 
     with open(os.path.realpath(__file__), 'wb') as f:
@@ -62,7 +63,7 @@ if not message.get("verify") is None:
     sys.exit(0)
 
 if not message.get("version") is None:
-    send_message(encode_message(VERSION))
+    send_message(encode_message(__version__))
     sys.exit(0)
 
 if not message.get("checkForUpdate") is None:
