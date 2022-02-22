@@ -11,7 +11,7 @@ import os
 import subprocess
 import requests
 
-VERSION = "2.03"
+VERSION = "2.04"
 REMOTE_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/ContextSearch.py"
 LATEST_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/version.json"
 
@@ -54,6 +54,8 @@ def update():
 
     with open(os.path.realpath(__file__)) as f:
         file.write(remote_script);
+
+    file.close()
 
 message = get_message()
 
