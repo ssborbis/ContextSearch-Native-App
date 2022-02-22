@@ -11,7 +11,7 @@ import os
 import subprocess
 import urllib.request
 
-VERSION = "2.08"
+VERSION = "2.09"
 REMOTE_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/ContextSearch.py"
 LATEST_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/version.json"
 
@@ -39,12 +39,11 @@ def send_message(encoded_message):
     sys.stdout.buffer.flush()
 
 def check_for_update():
-    from packaging import version
     response = urllib.request.urlopen(LATEST_URL)
     js = json.loads(response.read().decode("utf-8"))
     latest_version = js["version"]
 
-    if ( version.parse(latest_version) > version.parse(VERSION)):
+    if ( float(latest_version) > float(VERSION)):
         return latest_version
     else:
         return False
