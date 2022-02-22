@@ -52,7 +52,7 @@ def update():
     response = requests.get(REMOTE_URL)
     remote_script = response.content
 
-    with open(os.path.realpath(__file__)) as f:
+    with open(os.path.realpath(__file__), 'wb') as f:
         f.write(remote_script);
 
     f.close()
