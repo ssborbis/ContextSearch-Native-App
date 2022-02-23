@@ -13,6 +13,10 @@ Be sure to install [Python 3](https://www.python.org/downloads/) before using th
 ## Using the Installer ( easy way )
 Download and run <a href="https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/install.py" download>install.py</a>
 
+To uninstall, run
+```
+install.py --uninstall
+```
 
 ---
 

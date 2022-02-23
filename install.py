@@ -20,7 +20,6 @@ browsers_file           = "browsers.json"
 windows_install_path    = "~\\AppData\\Roaming\\ContextSearch-webext\\"
 nix_install_path        = "~/ContextSearch-webext/"
 install_global          = False
-
 repository_path         = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/"
 
 def loadLocalThenRemote(local_path, remote_path):
@@ -67,9 +66,13 @@ def installBinary(path):
             f.write(loadBinary())  
     except OSError as error:
         print(error)
+        sys.exit(1)
 
-    st = os.stat(os.path.join(path, binary_file))
-    os.chmod(os.path.join(path, binary_file), st.st_mode | stat.S_IEXEC)
+    try:
+        st = os.stat(os.path.join(path, binary_file))
+        os.chmod(os.path.join(path, binary_file), st.st_mode | stat.S_IEXEC)
+    except OSError as error:
+        print(error)
 
 def installManifest(platform):
     for b in loadBrowsers():
