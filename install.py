@@ -4,6 +4,7 @@ import os
 import sys
 import json
 import copy
+import stat
 import urllib.request
 
 manifest_template = {
@@ -63,9 +64,12 @@ def installBinary(path):
 
     try:
         with open(os.path.join(path, binary_file), "w" ) as f:
-            f.write(loadBinary())     
+            f.write(loadBinary())  
     except OSError as error:
         print(error)
+
+    st = os.stat(os.path.join(path, binary_file))
+    os.chmod(os.path.join(path, binary_file), st.st_mode | stat.S_IEXEC)
 
 def installManifest(platform):
     for b in loadBrowsers():
@@ -121,11 +125,21 @@ def installManifest(platform):
             for key in b["platforms"][platform]["registry_keys_user"]:
                 installRegistryKey(key, manifest_path)
 
+def getPlatform():
+    if sys.platform == "linux" or sys.platform == "linux2":
+        return "linux"
+
+    elif sys.platform == "darwin":
+        return "macOS"
+
+    elif sys.platform == "win32":
+        return "windows"
+
 if len(sys.argv) == 2 and sys.argv[1] == "--uninstall":
 
     print("Removing ContextSearch web-ext Native App")
 
-    if sys.platform == "win32":
+    if getPlatform() == "windows":
         # remove registry keys
         for b in loadBrowsers():
             for key in b["platforms"]["windows"]["registry_keys_user"]:
@@ -144,6 +158,13 @@ if len(sys.argv) == 2 and sys.argv[1] == "--uninstall":
             print("Error: %s : %s" % (app_folder, e.strerror))
 
     else:
+         # remove manifests
+        for b in loadBrowsers():
+            delete_path = os.path.expanduser(b["platforms"][getPlatform()]["user_config_path"] + manifest_file)
+
+            if os.path.exists(delete_path):
+                os.remove(delete_path)
+
         # remove app folder
         app_folder = os.path.expanduser(nix_install_path)
         try:
@@ -153,22 +174,15 @@ if len(sys.argv) == 2 and sys.argv[1] == "--uninstall":
             print("Error: %s : %s" % (app_folder, e.strerror))
     sys.exit(0)
 
-if sys.platform == "linux" or sys.platform == "linux2":
-    # linux
+if getPlatform() == "linux":
     installManifest("linux")
     installBinary(os.path.expanduser(nix_install_path))
 
-    sys.exit(0)
-
-elif sys.platform == "darwin":
-    # OS X
+elif getPlatform() == "macOS":
     installManifest("macOS")
     installBinary(os.path.expanduser(nix_install_path))
 
-    sys.exit(0)
-
-elif sys.platform == "win32":
-    # windows
+elif getPlatform() == "windows":
     installManifest("windows")
     installBinary(os.path.expanduser(windows_install_path))
 
@@ -177,6 +191,5 @@ elif sys.platform == "win32":
     with open( bat_path, 'w' ) as f:
         f.write("@echo off\r\n")
         f.write("\"" + sys.executable + "\" -u " + binary_file + "\r\n")
-    f.close()
 
-    sys.exit(0)
+sys.exit(0)
