@@ -122,7 +122,11 @@ def installManifest(platform):
                 installRegistryKey(key, manifest_path)
 
 if len(sys.argv) == 2 and sys.argv[1] == "--uninstall":
+
+    print("Removing ContextSearch web-ext Native App")
+
     if sys.platform == "win32":
+        # remove registry keys
         for b in loadBrowsers():
             for key in b["platforms"]["windows"]["registry_keys_user"]:
                 print("removing registry key", key)
@@ -130,6 +134,23 @@ if len(sys.argv) == 2 and sys.argv[1] == "--uninstall":
             for key in b["platforms"]["windows"]["registry_keys_global"]:
                 print("removing registry key", key)
                 uninstallRegistryKey(key)
+
+        # remove app folder
+        app_folder = os.path.expanduser(windows_install_path)
+        try:
+            import shutil
+            shutil.rmtree(app_folder)
+        except OSError as e:
+            print("Error: %s : %s" % (app_folder, e.strerror))
+
+    else:
+        # remove app folder
+        app_folder = os.path.expanduser(nix_install_path)
+        try:
+            import shutil
+            shutil.rmtree(app_folder)
+        except OSError as e:
+            print("Error: %s : %s" % (app_folder, e.strerror))
     sys.exit(0)
 
 if sys.platform == "linux" or sys.platform == "linux2":
