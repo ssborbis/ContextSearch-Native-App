@@ -148,9 +148,6 @@ if len(sys.argv) == 2 and sys.argv[1] == "--uninstall":
             for key in b["platforms"]["windows"]["registry_keys_user"]:
                 print("removing registry key", key)
                 uninstallRegistryKey(key)
-            for key in b["platforms"]["windows"]["registry_keys_global"]:
-                print("removing registry key", key)
-                uninstallRegistryKey(key)
 
         # remove app folder
         app_folder = os.path.expanduser(windows_install_path)
