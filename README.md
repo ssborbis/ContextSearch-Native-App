@@ -10,6 +10,11 @@ Be sure to install [Python 3](https://www.python.org/downloads/) before using th
 
 ---
 
+### Using With Alternative Browsers and Temporary / Unpacked Extensions
+Some browsers provide a different ID for the ContextSearch web-ext extension than what is listed in the [browsers.json](/browsers.json) file. In these cases, you will need to add the alternative IDs to the `allowed_extensions` or `allowed_origins` keys and run the installer. In some cases, you may want to create an entirely new browser entry in the [browsers.json](/browsers.json)
+
+---
+
 ## Using the Installer ( easy way )
 Download and run <a href="https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/install.py" download>install.py</a>
 
