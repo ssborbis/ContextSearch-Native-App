@@ -53,7 +53,7 @@ def update():
     response = urllib.request.urlopen(BINARY_URL)
     remote_script = response.read().decode("utf-8")
 
-    with open(os.path.realpath(__file__), 'wb') as f:
+    with open(os.path.realpath(__file__), 'w') as f:
         f.write(remote_script);
 
 message = get_message()
