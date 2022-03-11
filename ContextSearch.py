@@ -11,7 +11,7 @@ import os
 import subprocess
 import urllib.request
 
-__version__ = "2.09"
+__version__ = "2.10"
 
 BINARY_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/ContextSearch.py"
 VERSION_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/version.json"
