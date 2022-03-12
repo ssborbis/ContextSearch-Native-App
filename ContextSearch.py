@@ -22,6 +22,7 @@ def get_message():
 
     if not raw_length:
         sys.exit(0)
+
     message_length = struct.unpack('=I', raw_length)[0]
     message = sys.stdin.buffer.read(message_length).decode("utf-8")
     return json.loads(message)
@@ -77,18 +78,18 @@ if not message.get("update") is None:
 
 if not message.get("path") is None:
 
-    cwd = message.get("cwd") or "."
+    cwd = message.get("cwd") or os.getcwd()
     cwd = os.path.expanduser(cwd)
 
+    import shlex
+    cmd = shlex.split(message["path"])
+
     if message["return_stdout"]:
-        output = subprocess.check_output(message["path"], cwd=cwd, shell=True).decode()
+        output = subprocess.check_output(cmd, cwd=cwd, shell=True).decode()
         send_message(encode_message(output))
     else:
-        import shlex
-        cmd = shlex.split(message["path"])
-        subprocess.Popen(cmd, cwd=cwd)
-
-        send_message(encode_message(True))
+        subprocess.Popen(cmd, cwd=cwd, shell=True)
+        #send_message(encode_message(True))
     
     sys.exit(0)
 
