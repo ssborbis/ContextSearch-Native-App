@@ -11,7 +11,7 @@ import os
 import subprocess
 import urllib.request
 
-__version__ = "2.10"
+__version__ = "2.11"
 
 BINARY_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/ContextSearch.py"
 VERSION_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/version.json"
@@ -80,7 +80,7 @@ if not message.get("path") is None:
     cwd = message.get("cwd") or "."
     cwd = os.path.expanduser(cwd)
 
-    if not message.get("return_stdout") is None:
+    if message["return_stdout"] is True:
         output = subprocess.check_output(message["path"], cwd=cwd, shell=True).decode()
         send_message(encode_message(output))
     else:
