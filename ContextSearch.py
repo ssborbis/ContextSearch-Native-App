@@ -88,7 +88,8 @@ if not message.get("path") is None:
         output = subprocess.check_output(cmd, cwd=cwd, shell=True).decode()
         send_message(encode_message(output))
     else:
-        subprocess.Popen(cmd, cwd=cwd, shell=True)
+        subprocess.check_output(cmd, cwd=cwd, shell=True)
+        #subprocess.Popen(cmd, cwd=cwd, shell=True)
         #send_message(encode_message(True))
     
     sys.exit(0)
