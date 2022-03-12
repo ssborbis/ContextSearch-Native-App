@@ -80,7 +80,7 @@ if not message.get("path") is None:
     cwd = message.get("cwd") or "."
     cwd = os.path.expanduser(cwd)
 
-    if message["return_stdout"] is True:
+    if message["return_stdout"]:
         output = subprocess.check_output(message["path"], cwd=cwd, shell=True).decode()
         send_message(encode_message(output))
     else:
