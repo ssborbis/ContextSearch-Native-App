@@ -10,8 +10,9 @@ import struct
 import os
 import subprocess
 import urllib.request
+import platform
 
-__version__ = "2.11"
+__version__ = "2.12"
 
 BINARY_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/ContextSearch.py"
 VERSION_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/version.json"
@@ -88,9 +89,19 @@ if not message.get("path") is None:
         output = subprocess.check_output(cmd, cwd=cwd, shell=True).decode()
         send_message(encode_message(output))
     else:
-        subprocess.check_output(cmd, cwd=cwd, shell=True)
-        #subprocess.Popen(cmd, cwd=cwd, shell=True)
-        #send_message(encode_message(True))
+
+        if platform.system() == 'Windows':
+
+            CREATE_NEW_PROCESS_GROUP = 0x00000200
+            DETACHED_PROCESS = 0x00000008
+            CREATE_NEW_CONSOLE = 0x00000010
+            CREATE_BREAKAWAY_FROM_JOB = 0x01000000
+
+            subprocess.Popen(cmd, shell=True, creationflags=CREATE_BREAKAWAY_FROM_JOB )
+
+        else:
+            subprocess.Popen(cmd, cwd=cwd, shell=True)
+            #subprocess.check_output(cmd, cwd=cwd, shell=True)
     
     sys.exit(0)
 
