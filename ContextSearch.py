@@ -9,7 +9,7 @@ import sys
 import struct
 import os
 
-__version__ = "2.13"
+__version__ = "2.14"
 
 BINARY_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/ContextSearch.py"
 VERSION_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/version.json"
@@ -87,7 +87,7 @@ if not message.get("path") is None:
     cmd = shlex.split(message["path"])
 
     if message["return_stdout"]:
-        output = subprocess.check_output(cmd, cwd=cwd, shell=True).decode()
+        output = subprocess.check_output(message["path"], cwd=cwd, shell=True).decode()
         send_message(encode_message(output))
     else:
 
@@ -98,10 +98,10 @@ if not message.get("path") is None:
             CREATE_NEW_CONSOLE = 0x00000010
             CREATE_BREAKAWAY_FROM_JOB = 0x01000000
 
-            subprocess.Popen(cmd, shell=True, creationflags=CREATE_BREAKAWAY_FROM_JOB )
+            subprocess.run(message["path"], cwd=cwd, shell=True, creationflags=CREATE_BREAKAWAY_FROM_JOB )
 
         else:
-            subprocess.Popen(cmd, cwd=cwd)
+            subprocess.run(message["path"], cwd=cwd, shell=True)
     
     sys.exit(0)
 
