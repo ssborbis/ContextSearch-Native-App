@@ -8,11 +8,8 @@ import json
 import sys
 import struct
 import os
-import subprocess
-import urllib.request
-import platform
 
-__version__ = "2.12"
+__version__ = "2.13"
 
 BINARY_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/ContextSearch.py"
 VERSION_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/version.json"
@@ -42,6 +39,7 @@ def send_message(encoded_message):
     sys.stdout.buffer.flush()
 
 def check_for_update():
+    import urllib.request
     response = urllib.request.urlopen(VERSION_URL)
     js = json.loads(response.read().decode("utf-8"))
     latest_version = js["version"]
@@ -52,6 +50,7 @@ def check_for_update():
         return False
 
 def update():
+    import urllib.request
     response = urllib.request.urlopen(BINARY_URL)
     remote_script = response.read().decode("utf-8")
 
@@ -79,6 +78,8 @@ if not message.get("update") is None:
 
 if not message.get("path") is None:
 
+    import subprocess
+
     cwd = message.get("cwd") or os.getcwd()
     cwd = os.path.expanduser(cwd)
 
@@ -90,7 +91,7 @@ if not message.get("path") is None:
         send_message(encode_message(output))
     else:
 
-        if platform.system() == 'Windows':
+        if sys.platform == "win32":
 
             CREATE_NEW_PROCESS_GROUP = 0x00000200
             DETACHED_PROCESS = 0x00000008
@@ -100,8 +101,7 @@ if not message.get("path") is None:
             subprocess.Popen(cmd, shell=True, creationflags=CREATE_BREAKAWAY_FROM_JOB )
 
         else:
-            subprocess.Popen(cmd, cwd=cwd, shell=True)
-            #subprocess.check_output(cmd, cwd=cwd, shell=True)
+            subprocess.Popen(cmd, cwd=cwd)
     
     sys.exit(0)
 
