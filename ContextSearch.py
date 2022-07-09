@@ -9,7 +9,7 @@ import sys
 import struct
 import os
 
-__version__ = "2.14"
+__version__ = "2.15"
 
 BINARY_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/ContextSearch.py"
 VERSION_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/version.json"
@@ -57,6 +57,19 @@ def update():
     with open(os.path.realpath(__file__), 'w') as f:
         f.write(remote_script);
 
+def download(url, dest):
+    from urllib.request import urlopen
+    from urllib.request import urlretrieve
+    import cgi
+
+    remotefile = urlopen(url)
+    content = remotefile.info()['Content-Disposition']
+    value, params = cgi.parse_header(content)
+    filename = os.path.join(dest, params["filename"])
+    urlretrieve(url, filename)
+
+    return filename
+
 message = get_message()
 
 if not message.get("verify") is None:
@@ -75,6 +88,13 @@ if not message.get("update") is None:
     update()
     send_message(encode_message(True))
     sys.exit(0)
+
+if not message.get("downloadURL") is None:
+    import tempfile
+    tmpdir = tempfile.gettempdir()
+
+    filename = download(message.get("downloadURL"), tmpdir)
+    message["path"] = message["path"].replace("{download_url}", filename)
 
 if not message.get("path") is None:
 
