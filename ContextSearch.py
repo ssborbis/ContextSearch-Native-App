@@ -9,7 +9,7 @@ import sys
 import struct
 import os
 
-__version__ = "2.16"
+__version__ = "2.17"
 
 BINARY_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/ContextSearch.py"
 VERSION_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/version.json"
@@ -68,7 +68,7 @@ def download(url, dest):
         value, params = cgi.parse_header(content)
         filename = os.path.join(dest, params["filename"])
     else:
-        filename = os.path.basename(url)
+        filename = os.path.join(dest, os.path.basename(url))
 
     urlretrieve(url, filename)
 
