@@ -9,7 +9,7 @@ import sys
 import struct
 import os
 
-__version__ = "2.17"
+__version__ = "2.18"
 
 BINARY_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/ContextSearch.py"
 VERSION_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/version.json"
@@ -94,8 +94,13 @@ if not message.get("update") is None:
     sys.exit(0)
 
 if not message.get("downloadURL") is None:
-    import tempfile
-    tmpdir = tempfile.gettempdir()
+    tmpdir = None
+
+    if not message.get("downloadFolder") is None and os.path.isdir(os.path.expanduser(message.get("downloadFolder"))):
+        tmpdir = os.path.expanduser(message.get("downloadFolder"))
+    else:
+        import tempfile
+        tmpdir = tempfile.gettempdir()
 
     filename = download(message.get("downloadURL"), tmpdir)
     message["path"] = message["path"].replace("{download_url}", filename)
