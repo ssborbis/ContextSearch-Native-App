@@ -8,11 +8,19 @@ import json
 import sys
 import struct
 import os
+import logging
 
-__version__ = "2.18"
+__version__ = "2.19"
 
 BINARY_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/ContextSearch.py"
 VERSION_URL = "https://raw.githubusercontent.com/ssborbis/ContextSearch-Native-App/master/version.json"
+
+logging.basicConfig(
+    filename='python.log', 
+    encoding='utf-8',
+    format='%(asctime)s %(levelname)-8s %(message)s',
+    level=logging.INFO,
+    datefmt='%Y-%m-%d %H:%M:%S')
 
 # Read a message from stdin and decode it.
 def get_message():
@@ -58,81 +66,92 @@ def update():
         f.write(remote_script);
 
 def download(url, dest):
-    from urllib.request import urlopen
-    from urllib.request import urlretrieve
+    import urllib.request
+    import urllib.error
     import cgi
 
-    remotefile = urlopen(url)
+    remotefile = urllib.request.urlopen(url)
+
     content = remotefile.info()['Content-Disposition']
-    if not content is None:
+
+    if content:
         value, params = cgi.parse_header(content)
         filename = os.path.join(dest, params["filename"])
     else:
         filename = os.path.join(dest, os.path.basename(url))
 
-    urlretrieve(url, filename)
+    urllib.request.urlretrieve(url, filename)
 
     return filename
 
-message = get_message()
+try:
 
-if not message.get("verify") is None:
-    send_message(encode_message(True))
-    sys.exit(0)
+    # receive nativeMessage
+    message = get_message()
 
-if not message.get("version") is None:
-    send_message(encode_message(__version__))
-    sys.exit(0)
+    if message.get("verify"):
+        send_message(encode_message(True))
+        sys.exit(0)
 
-if not message.get("checkForUpdate") is None:
-    send_message(encode_message(check_for_update()))
-    sys.exit(0)
+    elif message.get("version"):
+        send_message(encode_message(__version__))
+        sys.exit(0)
 
-if not message.get("update") is None:
-    update()
-    send_message(encode_message(True))
-    sys.exit(0)
+    elif message.get("checkForUpdate"):
+        send_message(encode_message(check_for_update()))
+        sys.exit(0)
 
-if not message.get("downloadURL") is None:
-    tmpdir = None
+    elif message.get("update"):
+        update()
+        send_message(encode_message(True))
+        sys.exit(0)
 
-    if not message.get("downloadFolder") is None and os.path.isdir(os.path.expanduser(message.get("downloadFolder"))):
-        tmpdir = os.path.expanduser(message.get("downloadFolder"))
-    else:
-        import tempfile
-        tmpdir = tempfile.gettempdir()
+    # use python to fetch remote content
+    if message.get("downloadURL"):
+        tmpdir = None
 
-    filename = download(message.get("downloadURL"), tmpdir)
-    message["path"] = message["path"].replace("{download_url}", filename)
-
-if not message.get("path") is None:
-
-    import subprocess
-
-    cwd = message.get("cwd") or os.getcwd()
-    cwd = os.path.expanduser(cwd)
-
-    import shlex
-    cmd = shlex.split(message["path"])
-
-    if message["return_stdout"]:
-        output = subprocess.check_output(message["path"], cwd=cwd, shell=True).decode()
-        send_message(encode_message(output))
-    else:
-
-        if sys.platform == "win32":
-
-            CREATE_NEW_PROCESS_GROUP = 0x00000200
-            DETACHED_PROCESS = 0x00000008
-            CREATE_NEW_CONSOLE = 0x00000010
-            CREATE_BREAKAWAY_FROM_JOB = 0x01000000
-
-            subprocess.run(message["path"], cwd=cwd, shell=True, creationflags=CREATE_BREAKAWAY_FROM_JOB )
-
+        if message.get("downloadFolder") and os.path.isdir(os.path.expanduser(message.get("downloadFolder"))):
+            tmpdir = os.path.expanduser(message.get("downloadFolder"))
         else:
-            subprocess.run(message["path"], cwd=cwd, shell=True)
-    
-    sys.exit(0)
+            import tempfile
+            tmpdir = tempfile.gettempdir()
 
-send_message(encode_message(False))
-sys.exit(1)
+        filename = download(message.get("downloadURL"), tmpdir)
+        message["path"] = message["path"].replace("{download_url}", filename)
+
+    # execute shell command
+    if message.get("path"):
+
+        import subprocess
+
+        cwd = message.get("cwd") or os.getcwd()
+        cwd = os.path.expanduser(cwd)
+
+        import shlex
+        cmd = shlex.split(message["path"])
+
+        if message["return_stdout"]:
+            output = subprocess.check_output(message["path"], cwd=cwd, shell=True).decode()
+            send_message(encode_message(output))
+        else:
+
+            if sys.platform == "win32":
+
+                CREATE_NEW_PROCESS_GROUP = 0x00000200
+                DETACHED_PROCESS = 0x00000008
+                CREATE_NEW_CONSOLE = 0x00000010
+                CREATE_BREAKAWAY_FROM_JOB = 0x01000000
+
+                subprocess.run(message["path"], cwd=cwd, shell=True, creationflags=CREATE_BREAKAWAY_FROM_JOB )
+
+            else:
+                subprocess.run(message["path"], cwd=cwd, shell=True)
+        
+        sys.exit(0)
+
+    # no valid requests
+    send_message(encode_message(False))
+    sys.exit(1)
+
+except Exception as e:
+    logging.error(e)
